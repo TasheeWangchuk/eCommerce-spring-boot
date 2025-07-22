@@ -2,7 +2,6 @@ package controller;
 
 import model.Category;
 import service.CategoryService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +16,14 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("api/public/categories")
+    @GetMapping("/api/public/categories")
     public ResponseEntity<List<Category>> getCategories() {
         List<Category> Categories = categoryService.getAllCategories();
         return new ResponseEntity<>(Categories, HttpStatus.OK);
     }
 
-    @PostMapping("api/public/categories")
-    public ResponseEntity<String> createCategory(@Valid @RequestBody Category category) {
+    @PostMapping("/api/public/categories")
+    public ResponseEntity<String> createCategory(@RequestBody Category category) {
         categoryService.createCategory(category);
         return new ResponseEntity<>("Category created successfully", HttpStatus.CREATED);
     }
